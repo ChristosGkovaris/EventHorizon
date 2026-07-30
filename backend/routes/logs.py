@@ -1,31 +1,12 @@
 from flask import Blueprint
+from services.log_services import get_logs
 
 logs_bp = Blueprint("logs", __name__)
 
 
-#health endpoint
-@logs_bp.get("/logs") 
-def get_logs():
-    logs = [
-        {
-            "id": 1,
-            "service": "auth-service",
-            "severity": "INFO",
-            "message": "User logged in successfully"
-        },
-        {
-            "id": 2,
-            "service": "payment-service",
-            "severity": "ERROR",
-            "message": "Payment request timed out"
-        },
-        {
-            "id": 3,
-            "service": "database-service",
-            "severity": "WARNING",
-            "message": "Database connection pool is almost full"
-        }
-    ]
+@logs_bp.get("/logs")
+def list_logs():
+    logs = get_logs()
 
     return {
         "logs": logs
