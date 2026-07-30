@@ -4,7 +4,7 @@ health_bp = Blueprint("health", __name__)
 
 
 #health endpoint
-@health_bp.get("/api/health") 
+@health_bp.get("/health") 
 def health():
     return {
         "service": "event-horizon-api",

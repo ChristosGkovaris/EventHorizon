@@ -6,9 +6,9 @@ from routes.logs import logs_bp
 
 app = Flask(__name__)
 
-app.register_blueprint(health_bp)
-app.register_blueprint(docs_bp)
-app.register_blueprint(logs_bp)
+app.register_blueprint(health_bp, url_prefix="/api")
+app.register_blueprint(docs_bp, url_prefix="/api")
+app.register_blueprint(logs_bp, url_prefix="/api")
 
 
 if __name__ == "__main__":
