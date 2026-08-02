@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 logs_bp = Blueprint("logs", __name__)
 
@@ -6,6 +6,12 @@ logs_bp = Blueprint("logs", __name__)
 #logs endpoint
 @logs_bp.get("/logs") 
 def get_logs():
+
+    # initialization
+    requested_severity = request.args.get("severity")
+    matching_list = []
+
+
     logs = [
         {
             "id": 1,
@@ -27,6 +33,9 @@ def get_logs():
         }
     ]
 
-    return {
-        "logs": logs
-    }
+
+    # server request
+    for i in range(0, len(logs)):
+        if requested_severity == logs[i]["severity"]:
+            matching_list.append(logs[i])
+    return matching_list
